@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<body>
+    <h3>Loan Form</h3>
+    <form action="http://127.0.0.1:8000/api/loan/create" method='post' enctype="multipart/form-data">
+       <span>Enter Loan type:</span><br>
+       <select id="loantype" name="loantype">
+        <option value="Home Loan">Home Loan</option>
+        <option value="Car Loan">Car Loan</option>
+        <option value="Educational Loan">Educational Loan</option>
+        <option value="Business Loan">Business Loan</option>
+       </select>
+        <br><br>
+       <input type="text" name="loan" id="loan" placeholder="loan amount">
+        <br>
+       <input type="text" name="irate" id="irate" placeholder="Interest Rate">
+        <br>
+       <input type="text" name="apaid" id="apaid" placeholder="Amount Paid">
+        <br>
+       <span>Enter Loan Approve Date:</span><br>
+       <input type="date" name="aprvdate">
+        <br>
+       <span>Enter Document here:</span><br>
+	   <input type="file" name="document"><br>
+       <input type="submit" name="submit">
+    </form>
+</body>
+</html>

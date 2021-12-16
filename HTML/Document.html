@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+    </head>
+    <body onload="loadloans()">
+        <div>
+            <h1 class="text text-lg-center" style="margin-top: 50px;">Loan Details:</h1>
+        </div>
+        <div style="justify-content: center;">
+            <table class="table table-borded" style="margin-top: 50px;">
+                <tr class="column text-center">
+                    <td>
+                        <h2>LoanType:</h2><h2 id="loantype"></h2>
+                    </td>
+                </tr>
+                <tr class="column text-center">
+                    <td>
+                        <h3>Loan Amount: </h3><h3 id="loanamount"></h3>
+                    </td>
+                </tr>
+                <tr class="column text-center">
+                    <td>
+                        <h4>Interest Rate: </h4><h4 id="ir"></h4>
+                    </td>
+                </tr>
+                <tr class="column text-center">
+                    <td>
+                        <h4>Amount Paid: </h4> <h4 id="apaid"></h4>
+                    </td>
+                </tr>
+                <tr class="column text-center">
+                    <td>
+                        <h4>Approve Date: </h4><h4 id="date"></h4>
+                    </td>
+                </tr>
+                <tr class="column text-center">
+                    <td>
+                        <img src="" id="loan" height="200px">
+                    </td>
+                </tr>
+                
+            </table>
+        </div>
+        <script>
+            function loadloans()
+            {
+                const xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if(this.readyState==4 && this.status==200)
+                    {
+                        var iter=0;
+                        var object = JSON.parse(this.responseText);
+                        var count = Object.keys(object).length;
+                        document.getElementById('loan').src = object[0].loandocument;
+                        document.getElementById("loantype").innerHTML = '<strong>'+object[0].loantype+'</strong>';
+                        document.getElementById("loanamount").innerHTML = object[0].loanamount;
+                        document.getElementById("ir").innerHTML = object[0].loaninterestrate;
+                        document.getElementById("apaid").innerHTML = object[0].amountpaid;
+                        document.getElementById("date").innerHTML = object[0].loanapprovedate;
+						console.log(x);
+                        
+                    }
+                };
+                xhttp.open("GET", "http://127.0.0.1:8000/api/loan/details/11");
+				
+                xhttp.send();
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body onload="loadlist()">
+    <div>
+        <h1 class="text text-center" style="margin-top: 50px;">Loan Request:</h1>
+    </div>
+    <div style="justify-content: center;">
+        <table class="table table-borded" style="margin-top: 50px;" id="loandata">               
+        </table>
+    </div>
+    <script>
+        function loadlist()
+        {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                var text = '<tr> <td class="column text-center"> No Data Found <td> <tr>';
+                if(this.readyState==4 && this.status==200)
+                {
+                    text = '<tr><th>loanid</th><th>loantype</th><th>loanamount</th><th>loanapprovedate</th><th>loandocument</th></tr>';
+                    var iter=0;
+                    var object = JSON.parse(this.responseText);
+                    var count = Object.keys(object).length;
+                    var tablerow = '';
+                    while(iter<count)
+                    {
+                        tablerow = tablerow + '<tr><td><h3>'+ object[iter].id +'</h3></td><td><h3>' + object[iter].loantype + 
+                            '</h3></td><td><h3>' + object[iter].loanamount + '</h3></td><td><h3>' + object[iter].loanapprovedate + 
+                            '</h3></td><td class="column text-center"><img src="' + object[iter].loandocument + 
+                            '" height="300px"></td></tr>';
+                        iter = iter + 1;
+                    }
+                    text = text + tablerow;
+                }
+                document.getElementById('loandata').innerHTML = text;
+            };
+            xhttp.open("GET", "http://127.0.0.1:8000/api/loan/list");
+            xhttp.send();
+        }
+    </script>
+</body>
+</html>
