@@ -34,6 +34,7 @@ class loanController extends Controller
         $loan->loanapprovedate=$request->aprvdate;
         $loan->loandocument=$imageData;
         $loan->save();
+        return "Loan Create Done";
     }
     function loanList()
     {

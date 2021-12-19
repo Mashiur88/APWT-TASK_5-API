@@ -23,7 +23,7 @@
                 var text = '<tr> <td class="column text-center"> No Data Found <td> <tr>';
                 if(this.readyState==4 && this.status==200)
                 {
-                    text = '<tr><th>loanid</th><th>loantype</th><th>loanamount</th><th>loanapprovedate</th><th>loandocument</th></tr>';
+                    text = '<tr><th>loanid</th><th>loantype</th><th>loanamount</th><th>loanapprovedate</th></tr>';
                     var iter=0;
                     var object = JSON.parse(this.responseText);
                     var count = Object.keys(object).length;
@@ -32,8 +32,7 @@
                     {
                         tablerow = tablerow + '<tr><td><h3>'+ object[iter].id +'</h3></td><td><h3>' + object[iter].loantype + 
                             '</h3></td><td><h3>' + object[iter].loanamount + '</h3></td><td><h3>' + object[iter].loanapprovedate + 
-                            '</h3></td><td class="column text-center"><img src="' + object[iter].loandocument + 
-                            '" height="300px"></td></tr>';
+                            '</h3></td></tr>';
                         iter = iter + 1;
                     }
                     text = text + tablerow;
